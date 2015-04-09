@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="scripts/angular.js"></script>
+    <script type="text/javascript" src="scripts/addsale.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/index.css">
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/ClearanceSaleScript.js"></script>
+    <script>
+        $(function(){
+           $("#utabs-dropdown2-clearance").tabs();
+        });
+    </script>
+
+</head>
+<body ng-app="myApp" ng-controller="Controller">
+<header>
+
+    <!-- -------------------##### LOGO + SEARCH + SUBMIT + LINKS #####------------------ -->
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <img src="images/logo2.PNG" height="60px" width="100px">
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+                <div class="search-bar">
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search" size="60">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+                <div id="header-link">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Support</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">My Account <span class="caret"></span>
+                        </a>
+
+                            <ul class="dropdown-menu">
+                                <li class="divider"></li>
+                                <li><div class= class="list-group" id="f1"><a class="list-group-item" href="#">Feedback</a></div></li>
+                                <li><div class= class="list-group" id="f2"><a class="list-group-item" href="#">Tracking</a></div></li>
+                            </ul>
+
+                        </li>
+                        <li><a href="#">Cart</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                    </ul>
+                    <div id="feedbackmodel1" class="modal" ng-app="myApp" ng-controller="Controller">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close  closemodal" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title">FEEDBACK</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal">
+                                        <fieldset>
+                                            <legend>YOUR FEEDBACK IMPROVES US</legend>
+
+                                            <div class="form-group">
+                                                <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                                                <div class="col-lg-10">
+                                                    <input type="text" class="form-control" id="inputEmail"  ng-model="feedback.email">
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputProduct" class="col-lg-2 control-label" >ProductName</label>
+                                                <div class="col-lg-10">
+                                                    <input type="text" class="form-control" id="inputProduct" placeholder="ProductName" ng-model="feedback.productname" >
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="textArea" class="col-lg-2 control-label">Textarea</label>
+                                                <div class="col-lg-10">
+                                                    <textarea class="form-control" rows="3" id="textArea" ng-model="feedback.textarea1"></textarea>
+                                                    <span class="help-block">Customer feedback is precious to improve ourselves</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="select" class="col-lg-2 control-label">Ratings</label>
+                                                <div class="col-lg-10">
+                                                    <select class="form-control" id="select" style="height:1%" ng-model="feedback.rating">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-10 col-lg-offset-2">
+                                                    <button type="button" class="btn btn-primary"  ng-click="createfeedback()">Post</button>
+                                                    <button type="reset" class="btn btn-default">Reset</button>
+
+                                                </div>
+                                            </div>
+                                            <div><h3>{{status}}</h3></div>
+                                        </fieldset>
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button  type="button" class="btn btn-default closemodal" data-dismiss="modal">Close</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal" id="tracking1" ng-app="myApp" ng-controller="Controller">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close closemodal2" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title">Track</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-condensed">
+                                                <thead>
+                                                <tr><td><input type="text" name="emailid" ng-model="trackinginformation.emailid"></td><td><input type="button" value="submit" class="btn btn-primary"  ng-click="trackingInfo()"></td></tr>
+                                                <tr>
+                                                    <td><strong>Product</strong></td>
+                                                    <td class="text-center"><strong> Price</strong></td>
+                                                    <td class="text-center"><strong> Quantity</strong></td>
+                                                    <td class="text-center"><strong>Status</strong></td>
+                                                    <td class="text-right"><strong>Delivery Date</strong></td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr >
+                                                    <td><img src="images/BagImages/bag1.jpg"></td>
+                                                    <td class="text-center" id="price"><input type="text" ng-model="tracking.price" ng-disabled="true" ></td>
+                                                    <td class="text-center" id="quantity"><input type="text"  ng-model="tracking.quantity" ng-disabled="true" ></td>
+                                                    <td class="text-center" id="status" ><input type="text" ng-model="tracking.status" ng-disabled="true" ></td>
+                                                    <td class="text-right"id="deliverydate"><input type="text"  ng-model="tracking.deliverydate" ng-disabled="true" ></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><img src="images/BagImages/bag2.jpg"></td>
+                                                    <td class="text-center" id="price1"><input type="text" ng-model="tracking.price" ng-disabled="true" ></td>
+                                                    <td class="text-center" id="quantity1"><input type="text"  ng-model="tracking.quantity"  ng-disabled="true"></td>
+                                                    <td class="text-center" id="status1" ><input type="text" ng-model="tracking.status" ng-disabled="true"></td>
+                                                    <td class="text-right"id="deliverydate1"><input type="text"  ng-model="tracking.deliverydate"  ng-disabled="true"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default closemodal2" data-dismiss="modal" ng-click="createtracking()">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</header>
+
+
+<div class="col-lg-1"></div>
+<section class="col-lg-10">
+    <div id="sec-container">
+        <!-- -------------------##### MENU BAR #####------------------ -->
+        <div id="tabs">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tabs-shop" data-toggle="tab" aria-expanded="true">Shop Now</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        Sale <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class=""><a href="#tabs-dropdown1-offers" data-toggle="tab" aria-expanded="false">Offers</a></li>
+                        <li class="divider"></li>
+                        <li class=""><a href="#utabs-dropdown2-clearance" data-toggle="tab" aria-expanded="false">Clearance Sale</a></li>
+                    </ul>
+                </li>
+                <li class=""><a href="#tabs-clubcard" data-toggle="tab" aria-expanded="false">Clubcard</a></li>
+                <li class=""><a href="#tabs-gift" data-toggle="tab" aria-expanded="false">Gift Pooling</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        Others <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class=""><a href="#tabs-dropdown1-blog" data-toggle="tab" aria-expanded="false">Blog</a></li>
+                        <li class="divider"></li>
+                        <li class=""><a href="#tabs-dropdown2-forum" data-toggle="tab" aria-expanded="false">Forum</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content col-md-12 ">
+                <div class="tab-pane fade active in" id="tabs-shop">
+                    <div class="sec-leftpane col-sm-3">
+                        <p>Shops left pane </p>
+                        <p>All your list of links that you wanna give come here..</p>
+                    </div>
+                    <div class="sec-body col-md-9">
+                        <p>Shops contents..</p>
+                        <br>
+                        <br>
+                        <p>Shops contents..</p>
+                        <br>
+                        <br>
+                        <p>Shops contents..</p>
+                        <br>
+                        <br>
+                        <p>Shops contents..</p>
+                        <br>
+                        <br>
+                        <p>Shops contents..</p>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tabs-clubcard">
+                    <div class="sec-leftpane col-sm-3">
+                        <p>Clubcard left pane </p>
+                        <p>All your list of links that you wanna give come here..</p>
+                    </div>
+                    <div class="sec-body col-md-9">
+                        <p>Clubcard contents..</p>
+                        <br>
+                        <br>
+                        <p>Clubcard contents..</p>
+                        <br>
+                        <br>
+                        <p>Clubcard contents..</p>
+                        <br>
+                        <br>
+                        <p>Clubcard contents..</p>
+                        <br>
+                        <br>
+                        <p>Clubcard contents..</p>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tabs-gift">
+                    <div class="sec-leftpane col-sm-3">
+                        <p>gift left pane </p>
+                        <p>All your list of links that you wanna give come here..</p>
+                    </div>
+                    <div class="sec-body col-md-9">
+                        <p>gift contents..</p>
+                        <br>
+                        <br>
+                        <p>gift contents..</p>
+                        <br>
+                        <br>
+                        <p>gift contents..</p>
+                        <br>
+                        <br>
+                        <p>gift contents..</p>
+                        <br>
+                        <br>
+                        <p>gift contents..</p>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tabs-dropdown1-blog">
+                    <div class="sec-leftpane col-sm-3">
+                        <p>blog left pane </p>
+                        <p>All your list of links that you wanna give come here..</p>
+                    </div>
+                    <div class="sec-body col-md-9">
+                        <p>blog contents..</p>
+                        <br>
+                        <br>
+                        <p>blog contents..</p>
+                        <br>
+                        <br>
+                        <p>blog contents..</p>
+                        <br>
+                        <br>
+                        <p>blog contents..</p>
+                        <br>
+                        <br>
+                        <p>blog contents..</p>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tabs-dropdown2-forum">
+                    <div class="sec-leftpane col-sm-3">
+                        <p>forum left pane </p>
+                        <p>All your list of links that you wanna give come here..</p>
+                    </div>
+                    <div class="sec-body col-md-9">
+                        <p>forum contents..</p>
+                        <br>
+                        <br>
+                        <p>forum contents..</p>
+                        <br>
+                        <br>
+                        <p>forum contents..</p>
+                        <br>
+                        <br>
+                        <p>forum contents..</p>
+                        <br>
+                        <br>
+                        <p>forum contents..</p>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tabs-dropdown1-offers">
+                    <div class="sec-leftpane col-sm-3">
+                        <p>offers left pane </p>
+                        <p>All your list of links that you wanna give come here..</p>
+                    </div>
+                    <div class="sec-body col-md-9">
+                        <p>offers contents..</p>
+                        <br>
+                        <br>
+                        <p>offers contents..</p>
+                        <br>
+                        <br>
+                        <p>offers contents..</p>
+                        <br>
+                        <br>
+                        <p>offers contents..</p>
+                        <br>
+                        <br>
+                        <p>offers contents..</p>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="utabs-dropdown2-clearance">
+                    <div class="sec-leftpane col-sm-3">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li style="list-style: none" ><a href="#addSale"><h4>Add Sale</h4></a></li>
+                            <li style="list-style: none"><a href="#addProduct" ng-click="addProd()"><h4>Add Product</h4></a></li>
+                            <li style="list-style: none"><a href="#removeSale" ng-click="removeSale()"><h4>Remove Sale</h4></a></li>
+                            <li style="list-style: none"><a href="#removeProduct" ng-click="viewProduct()"><h4>Remove Product</h4></a></li>
+                            <li  style="list-style: none"><a href="#getRevenue"><h4>Get Revenue Details</h4></a></li>
+
+                        </ul>
+
+                    </div>
+                    <div class="sec-body col-md-9">
+                        <div id="addSale">
+                            <form name="addSaleForm" ng-submit="addSale()"><center>
+                                <h1>Add Sale</h1>
+                                <table>
+                                    <tr>
+                                        <td style="text-align:center;padding:30px;">Sale Id</td><td style="text-align:center;padding:30px;"><input type="text" id="saleid" ng-model="clobj.saleid"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;padding:30px;">Sale Name</td><td style="text-align:center;padding:30px;"><input type="text" id="salename" ng-model="clobj.salename"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;padding:30px;">From</td><td style="text-align:center;padding:30px;"><input type="Date" id="fromDate" ng-model="clobj.fromDate"/></td>
+                                    </tr>
+                                    <t>
+                                        <td style="text-align:center;padding:30px;">To</td><td style="text-align:center;padding:30px;"><input type="Date" id="toDate" ng-model="clobj.toDate"/></td>
+                                    </t>
+                                </table></center>
+                                <center><input type="submit" class="btn btn-primary" value="Submit"></center><br><br>
+
+                            </form>
+                            <div><h3>{{adds}}</h3></div>
+
+                        </div>
+
+                        <div id="addProduct" >
+                            <form name="addProductForm" ng-submit="addProduct()"><center>
+                                <h1>Add Product</h1>
+                                <table>
+                                    <tr>
+                                        <td style="text-align:center;padding:30px;">Sale Id</td><td style="text-align:center;padding:30px;"><select ng-model="clobj1.sid"><option ng-repeat="c in statusid" value="{{c}}">{{c}}</option></select></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;padding:30px;">Product Id</td><td style="text-align:center;padding:30px;"><select ng-model="clobj1.pid"><option ng-repeat="c1 in statusprod" value="{{c1.productId}}">{{c1.productId}}</option></select></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;padding:30px;">Discount</td><td style="text-align:center;padding:30px;"><input type="text" id="dis" ng-model="clobj1.discount"></td>
+                                    </tr>
+
+                                </table></center>
+                                <center><input type="submit"  class="btn btn-primary" value="Submit"></center><br><br>
+
+                            </form>
+                            <div><h3>{{addp}}</h3></div>
+                        </div>
+
+                        <div id="removeSale">
+                            <form name="removeSaleForm" ng-submit="removesalebyname()"><center>
+                                <h1>Remove Sale</h1>
+                                <table>
+                                    <tr>
+                                        <td style="text-align:center;padding:30px;">Sale Name</td>
+                                        <td style="text-align:center;padding:30px;"><select ng-model="clobj5.snamer"><option ng-repeat="c in status" value="{{c.clearanceSaleName}}">{{c.clearanceSaleName}}</option></select></td>
+                                    </tr>
+                                </table></center>
+                                <center><input type="submit" class="btn btn-primary" value="Submit"></center><br><br>
+
+                            </form>
+                            <div><h3>{{Remove}}</h3></div>
+                        </div>
+
+                        <div id="removeProduct">
+                            <form name="removeProductForm" ng-submit="removeProduct()"><center>
+                                <h1>Remove Product</h1>
+                                <table>
+
+                                    <tr>
+                                        <td style="text-align:center;padding:30px;">Product Id</td>
+                                        <td style="text-align:center;padding:30px;"><select ng-model="clobj3.pidr"><option ng-repeat="c2 in ViewProd" value="{{c2.productDiscountID}}">{{c2.productDiscountID}}</option></select></td>
+                                    </tr>
+
+                                </table></center>
+                                <center><input type="submit" class="btn btn-primary" value="Submit"></center><br><br>
+
+                            </form>
+                            <div><center><h3>{{removep}}</h3></center></div>
+                        </div>
+                        <div id="getRevenue">
+                            <form name="revenueForm" ng-submit="revenue()"><center>
+                                <h1>Revenue Details</h1>
+                                <table>
+                                    <tr>
+                                        <td style="text-align:center;padding:30px;">Product Name</td><td style="text-align:center;padding:30px;"><input type="text" id="pname" ng-model="clobj4.pname"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;padding:30px;">From</td><td style="text-align:center;padding:30px;"><input type="Date" id="fDate" ng-model="clobj4.fDate"/></td>
+
+
+                                        <td style="text-align:center;padding:30px;">To</td><td style="text-align:center;padding:30px;"><input type="Date" id="tDate" ng-model="clobj4.tDate"/></td>
+                                    </tr>
+
+                                </table></center>
+                                 <center><input type="submit"  class="btn btn-primary" value="Submit"></center><br><br>
+
+                            </form>
+                            <div><center><h3>{{Revenue}}</h3></center></div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="col-lg-1"></div>
+
+<footer>
+    <div id="footercontent">
+    <p>@Copyrights Reserved</p>
+    </div>
+</footer>
+
+</body>
+</html>
