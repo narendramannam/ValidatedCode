@@ -12,6 +12,8 @@
   <name>ClearanceSale Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+  	
+  	
   <!--JPA Dependencies -->
 	<dependency>
 		<groupId>antlr</groupId>
