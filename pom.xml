@@ -8,7 +8,7 @@
   <groupId>com.tesco</groupId>
   <artifactId>ClearanceSale</artifactId>
   <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.${buildNumber0}${buildNumber1}${buildNumber2}-SNAPSHOT</version>
   <name>ClearanceSale Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
